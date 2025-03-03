@@ -11,21 +11,38 @@ namespace WordPuzzle
         [SerializeField] private TextAsset levelConfigFile;
         private LevelFactory levelFactory = new LevelFactory();
 
+        private void Awake()
+        {
+            // Ensure levelConfigFile is loaded even if not assigned in Inspector
+            if (levelConfigFile == null)
+            {
+                levelConfigFile = Resources.Load<TextAsset>("LevelData");
+                if (levelConfigFile == null)
+                {
+                    Debug.LogError("RuntimeLevelLoader: Failed to load LevelData.json from Resources!");
+                }
+                else
+                {
+                    Debug.Log("RuntimeLevelLoader: Loaded LevelData.json manually from Resources");
+                }
+            }
+        }
+
         public List<LevelData> LoadLevels()
         {
             List<LevelData> levels = new List<LevelData>();
-            Debug.Log("RuntimeLevelLoader: Attempting to load levels");
+            Debug.Log($"RuntimeLevelLoader: Attempting to load levels on {Application.platform}");
 
             if (levelConfigFile != null)
             {
                 try
                 {
-                    Debug.Log("RuntimeLevelLoader: Loading from config file");
+                    Debug.Log($"RuntimeLevelLoader: Loading from config file: {levelConfigFile.name}");
                     var serializableLevels = JsonUtility.FromJson<SerializableLevelDataList>(levelConfigFile.text);
                     if (serializableLevels == null || serializableLevels.levels == null)
                     {
                         Debug.LogError("RuntimeLevelLoader: Failed to parse JSON or no levels found");
-                        return CreateSampleLevels();
+                        return new List<LevelData>(); // Return empty list instead of sample levels
                     }
 
                     foreach (var serializableLevel in serializableLevels.levels)
@@ -46,9 +63,9 @@ namespace WordPuzzle
                             correctWords = serializableLevel.correctWords
                         };
 
-                        // Log if assets are missing (expected for now)
                         if (level.problemImage == null) Debug.LogWarning($"RuntimeLevelLoader: Sprite not found at {imagePath}");
                         if (level.problemAnimation == null) Debug.LogWarning($"RuntimeLevelLoader: Animation not found at {problemAnimPath}");
+                        Debug.Log($"RuntimeLevelLoader: Loaded level: {level.levelId}");
 
                         levels.Add(level);
                     }
@@ -57,13 +74,13 @@ namespace WordPuzzle
                 catch (System.Exception ex)
                 {
                     Debug.LogError($"RuntimeLevelLoader: Error loading levels from config: {ex.Message}");
-                    levels = CreateSampleLevels();
+                    levels = new List<LevelData>(); // Return empty list on failure
                 }
             }
             else
             {
-                Debug.Log("RuntimeLevelLoader: No config file assigned, using sample levels");
-                levels = CreateSampleLevels();
+                Debug.LogError("RuntimeLevelLoader: No config file assigned or found in Resources!");
+                levels = new List<LevelData>(); // Return empty list instead of sample levels
             }
 
             Debug.Log($"RuntimeLevelLoader: Returning {levels.Count} levels");
@@ -77,38 +94,18 @@ namespace WordPuzzle
             if (resourcesIndex >= 0)
             {
                 string resourcePath = assetPath.Substring(resourcesIndex + 10);
-                return Path.ChangeExtension(resourcePath, null); // Remove extension
+                Debug.Log($"RuntimeLevelLoader: Resource path: {resourcePath}");
+                return Path.ChangeExtension(resourcePath, null);
             }
-            // For Packages/ paths, try loading directly (won't work with Resources.Load, but log for clarity)
-            Debug.LogWarning($"RuntimeLevelLoader: Path {assetPath} not in Resources, attempting raw path");
+            Debug.LogWarning($"RuntimeLevelLoader: Path {assetPath} not in Resources, using raw path");
             return assetPath;
         }
 
-        private List<LevelData> CreateSampleLevels()
+        private List<LevelData> CreateSampleLevels() // Keep for reference but not used
         {
             List<LevelData> levels = new List<LevelData>();
             Debug.Log("RuntimeLevelLoader: Creating sample levels");
-
-            levels.Add(levelFactory.CreateLevel(
-                "level_1",
-                null,
-                null,
-                null,
-                null,
-                new List<string> { "Medicine", "Water", "Candy", "Toy" },
-                new List<string> { "Medicine" }
-            ));
-
-            levels.Add(levelFactory.CreateLevel(
-                "level_2",
-                null,
-                null,
-                null,
-                null,
-                new List<string> { "The", "Girl", "Needs", "Sleep", "Food" },
-                new List<string> { "The", "Girl", "Needs", "Sleep" }
-            ));
-
+            // Sample levels removed to prevent accidental use
             Debug.Log($"RuntimeLevelLoader: Created {levels.Count} sample levels");
             return levels;
         }

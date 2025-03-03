@@ -2,7 +2,7 @@
     "levels": [
         {
             "levelId": "Sick Mom",
-            "problemImagePath": "Assets/Resources/ProblemImages/DALL·E 2025-03-03 17.31.59 - A heartwarming scene of a young girl taking care of her sick mother at home. The mother is lying on a couch, covered with a cozy blanket, looking tire.jpg",
+            "problemImagePath": "Assets/Resources/ProblemImages/SickMom.jpg",
             "problemAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
             "correctAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
             "incorrectAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
@@ -16,7 +16,7 @@
         },
         {
             "levelId": "ThirstyBoy",
-            "problemImagePath": "Assets/Resources/ProblemImages/DALL·E 2025-03-03 17.33.17 - A young boy, around 6 years old, looking very thirsty on a hot summer day. He is standing outside in a sunny park, sweating and holding an empty water.jpg",
+            "problemImagePath": "Assets/Resources/ProblemImages/ThirstyBoy.jpg",
             "problemAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
             "correctAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
             "incorrectAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
@@ -30,7 +30,7 @@
         },
         {
             "levelId": "HungryCat",
-            "problemImagePath": "Assets/Resources/ProblemImages/DALL·E 2025-03-03 17.33.56 - A hungry cat sitting outside a house, looking up with big, pleading eyes. The cat is a small, thin tabby with a slightly ruffled coat, sitting near an.jpg",
+            "problemImagePath": "Assets/Resources/ProblemImages/HungryCat.jpg",
             "problemAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
             "correctAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
             "incorrectAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
@@ -44,7 +44,7 @@
         },
         {
             "levelId": "TiredMan",
-            "problemImagePath": "Assets/Resources/ProblemImages/DALL·E 2025-03-03 17.34.33 - A tired man sitting on a park bench in the evening, looking completely exhausted. He is wearing a slightly wrinkled shirt and tie, with his sleeves ro.jpg",
+            "problemImagePath": "Assets/Resources/ProblemImages/TiredMan.jpg",
             "problemAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
             "correctAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
             "incorrectAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
@@ -58,7 +58,7 @@
         },
         {
             "levelId": "LostDog",
-            "problemImagePath": "Assets/Resources/ProblemImages/DALL·E 2025-03-03 17.34.53 - A lost dog standing alone on a quiet street, looking confused and scared. The dog is a small golden retriever mix with a collar but no leash, its ears.jpg",
+            "problemImagePath": "Assets/Resources/ProblemImages/lostDog.jpg",
             "problemAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
             "correctAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
             "incorrectAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",

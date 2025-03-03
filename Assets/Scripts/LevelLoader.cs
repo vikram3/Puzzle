@@ -13,40 +13,129 @@ namespace WordPuzzle
 
         private LevelFactory levelFactory = new LevelFactory();
 
+        [System.Serializable]
+        public class SerializableLevelData
+        {
+            public string levelId;
+            public string problemImagePath;
+            public string problemAnimationPath;
+            public string correctAnimationPath;
+            public string incorrectAnimationPath;
+            public List<string> wordOptions = new List<string>();
+            public List<string> correctWords = new List<string>();
+        }
+
+        [System.Serializable]
+        public class SerializableLevelDataList
+        {
+            public List<SerializableLevelData> levels = new List<SerializableLevelData>();
+        }
+
         public List<LevelData> LoadLevels()
         {
             List<LevelData> levels = new List<LevelData>();
+            Debug.Log("LevelLoader: Loading levels");
 
-            levels.Add(CreateSampleLevel1());
-            levels.Add(CreateSampleLevel2());
+            if (levelConfigFile != null)
+            {
+                try
+                {
+                    Debug.Log("LevelLoader: Parsing level config file");
+                    var serializableLevels = JsonUtility.FromJson<SerializableLevelDataList>(levelConfigFile.text);
+                    if (serializableLevels == null || serializableLevels.levels == null)
+                    {
+                        Debug.LogError("LevelLoader: Failed to parse JSON or no levels found");
+                        return CreateDefaultLevels();
+                    }
+
+                    foreach (var serializableLevel in serializableLevels.levels)
+                    {
+                        // Extract resource paths
+                        string imagePath = GetResourcePath(serializableLevel.problemImagePath);
+                        string problemAnimPath = GetResourcePath(serializableLevel.problemAnimationPath);
+                        string correctAnimPath = GetResourcePath(serializableLevel.correctAnimationPath);
+                        string incorrectAnimPath = GetResourcePath(serializableLevel.incorrectAnimationPath);
+
+                        // Load assets (or use available lists if assigned)
+                        Sprite problemImage = Resources.Load<Sprite>(imagePath);
+                        AnimationClip problemAnim = Resources.Load<AnimationClip>(problemAnimPath);
+                        AnimationClip correctAnim = Resources.Load<AnimationClip>(correctAnimPath);
+                        AnimationClip incorrectAnim = Resources.Load<AnimationClip>(incorrectAnimPath);
+
+                        // Log warnings if assets are missing
+                        if (problemImage == null) Debug.LogWarning($"LevelLoader: Sprite not found at {imagePath}");
+                        if (problemAnim == null) Debug.LogWarning($"LevelLoader: Animation not found at {problemAnimPath}");
+
+                        LevelData level = levelFactory.CreateLevel(
+                            serializableLevel.levelId,
+                            problemImage ?? (availableImages.Count > 0 ? availableImages[0] : null), // Fallback
+                            problemAnim ?? (availableAnimations.Count > 0 ? availableAnimations[0] : null),
+                            correctAnim ?? (availableAnimations.Count > 1 ? availableAnimations[1] : null),
+                            incorrectAnim ?? (availableAnimations.Count > 2 ? availableAnimations[2] : null),
+                            serializableLevel.wordOptions,
+                            serializableLevel.correctWords
+                        );
+                        levels.Add(level);
+                    }
+                    Debug.Log($"LevelLoader: Loaded {levels.Count} levels from config");
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogError($"LevelLoader: Error loading levels from config: {ex.Message}");
+                    levels = CreateDefaultLevels();
+                }
+            }
+            else
+            {
+                Debug.Log("LevelLoader: No config file assigned, using default levels");
+                levels = CreateDefaultLevels();
+            }
 
             return levels;
         }
 
-        private LevelData CreateSampleLevel1()
+        private string GetResourcePath(string assetPath)
         {
-            return levelFactory.CreateLevel(
-                "level_1",
-                availableImages[0],
-                availableAnimations[0],
-                availableAnimations[1],
-                availableAnimations[2],
-                new List<string> { "Medicine", "Water", "Candy", "Toy" },
-                new List<string> { "Medicine" }
-            );
+            if (string.IsNullOrEmpty(assetPath)) return string.Empty;
+            int resourcesIndex = assetPath.IndexOf("Resources/");
+            if (resourcesIndex >= 0)
+            {
+                string resourcePath = assetPath.Substring(resourcesIndex + 10);
+                return System.IO.Path.ChangeExtension(resourcePath, null); // Remove extension
+            }
+            Debug.LogWarning($"LevelLoader: Path {assetPath} not in Resources, attempting raw path");
+            return assetPath;
         }
 
-        private LevelData CreateSampleLevel2()
+        private List<LevelData> CreateDefaultLevels()
         {
-            return levelFactory.CreateLevel(
-                "level_2",
-                availableImages[1],
-                availableAnimations[3],
-                availableAnimations[4],
-                availableAnimations[5],
-                new List<string> { "The", "Girl", "Needs", "Sleep", "Food" },
-                new List<string> { "The", "Girl", "Needs", "Sleep" }
-            );
+            List<LevelData> levels = new List<LevelData>();
+            Debug.Log("LevelLoader: Creating default levels");
+
+            // Default Level 1 (Sick Mom)
+            levels.Add(levelFactory.CreateLevel(
+                "Sick Mom",
+                availableImages.Count > 0 ? availableImages[0] : null,
+                availableAnimations.Count > 0 ? availableAnimations[0] : null,
+                availableAnimations.Count > 1 ? availableAnimations[1] : null,
+                availableAnimations.Count > 2 ? availableAnimations[2] : null,
+                new List<string> { "Medicine", "Candy", "Water" },
+                new List<string> { "Medicine", "Water" }
+            ));
+
+            // Default Level 2 (ThirstyBoy)
+            levels.Add(levelFactory.CreateLevel(
+                "ThirstyBoy",
+                availableImages.Count > 1 ? availableImages[1] : null,
+                availableAnimations.Count > 3 ? availableAnimations[3] : null,
+                availableAnimations.Count > 4 ? availableAnimations[4] : null,
+                availableAnimations.Count > 5 ? availableAnimations[5] : null,
+                new List<string> { "Water", "Milk" },
+                new List<string> { "Water" }
+            ));
+
+            Debug.Log($"LevelLoader: Created {levels.Count} default levels");
+            return levels;
         }
     }
 }
