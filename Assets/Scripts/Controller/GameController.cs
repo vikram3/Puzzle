@@ -10,11 +10,13 @@ namespace WordPuzzle.Controller
     {
         [SerializeField] private WordPuzzleUIView gameView;
         private GameModel gameModel = new GameModel();
-        private RuntimeLevelLoader levelLoader; // Changed from LevelLoader to RuntimeLevelLoader
+        private RuntimeLevelLoader levelLoader;
 
         private void Awake()
         {
+            Debug.Log("GameController: Awake called");
             InitializeComponents();
+            if (levelLoader != null) Debug.Log("GameController: levelLoader assigned in Awake");
             SubscribeToEvents();
         }
 
@@ -22,20 +24,23 @@ namespace WordPuzzle.Controller
         {
             if (gameView == null)
             {
-                Debug.LogError("GameView is not assigned in the Inspector!");
+                Debug.LogError("GameController: GameView is not assigned in the Inspector!");
                 return;
             }
             gameView.Initialize();
-            levelLoader = GetComponent<RuntimeLevelLoader>(); // Updated to RuntimeLevelLoader
+
+            levelLoader = GetComponent<RuntimeLevelLoader>();
             if (levelLoader == null)
             {
-                Debug.LogError("RuntimeLevelLoader component not found on this GameObject!");
-                return;
+                Debug.LogWarning("GameController: RuntimeLevelLoader not found, adding it automatically");
+                levelLoader = gameObject.AddComponent<RuntimeLevelLoader>();
             }
+            Debug.Log("GameController: Components initialized");
         }
 
         private void SubscribeToEvents()
         {
+            Debug.Log("GameController: Subscribing to events");
             gameView.OnSubmitAnswer += HandleSubmitAnswer;
             gameModel.OnLevelLoaded += HandleLevelLoaded;
             gameModel.OnScoreChanged += HandleScoreChanged;
@@ -43,41 +48,47 @@ namespace WordPuzzle.Controller
             gameModel.OnGameCompleted += HandleGameCompleted;
         }
 
-        public void StartGame()
+        public void StartGame() // Around Line 50-56
         {
+            Debug.Log("GameController: StartGame called");
             if (levelLoader == null)
             {
-                Debug.LogError("LevelLoader is null! Please ensure it’s attached to the GameController GameObject.");
+                Debug.LogError("GameController: LevelLoader is null in StartGame!"); // Line 55 or 56
                 return;
             }
-            List<LevelData> levels = levelLoader.LoadLevels();
+            List<LevelData> levels = levelLoader.LoadLevels(); // Line 56 or 57
+            Debug.Log($"GameController: Loaded {levels.Count} levels");
             gameModel.LoadLevels(levels);
             LoadCurrentLevel();
         }
 
         private void LoadCurrentLevel()
         {
+            Debug.Log("GameController: Loading current level");
             gameModel.GetCurrentLevel();
         }
 
         private void HandleLevelLoaded(LevelData level)
         {
+            Debug.Log($"GameController: HandleLevelLoaded called with level ID: {level.levelId}");
             gameView.DisplayLevel(level, gameModel.GetCurrentLevelIndex() + 1);
         }
 
         private void HandleSubmitAnswer(List<string> selectedWords)
         {
+            Debug.Log("GameController: HandleSubmitAnswer called");
             gameModel.SubmitAnswer(selectedWords);
         }
 
         private void HandleScoreChanged(int score)
         {
+            Debug.Log($"GameController: Score changed to {score}");
             gameView.UpdateScoreDisplay(score);
         }
 
         private void HandleAnswerResult(bool isCorrect, List<string> correctWords)
         {
-            var currentLevel = gameModel.GetCurrentLevel();
+            Debug.Log($"GameController: Answer result - Correct: {isCorrect}");
             gameView.ShowResult(isCorrect);
 
             if (isCorrect)
@@ -94,6 +105,7 @@ namespace WordPuzzle.Controller
 
         private void HandleGameCompleted()
         {
+            Debug.Log("GameController: Game completed");
             gameView.ShowGameCompleted(gameModel.GetCurrentScore());
         }
 

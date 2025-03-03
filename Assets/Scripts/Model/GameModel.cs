@@ -9,7 +9,6 @@ namespace WordPuzzle.Model
         private int currentLevelIndex = 0;
         private int playerScore = 0;
 
-        // Events
         public event Action<LevelData> OnLevelLoaded;
         public event Action<int> OnScoreChanged;
         public event Action<bool, List<string>> OnAnswerSubmitted;
@@ -20,6 +19,7 @@ namespace WordPuzzle.Model
             allLevels = levels;
             currentLevelIndex = 0;
             playerScore = 0;
+            UnityEngine.Debug.Log($"GameModel: Loaded {allLevels.Count} levels");
         }
 
         public LevelData GetCurrentLevel()
@@ -27,9 +27,11 @@ namespace WordPuzzle.Model
             if (currentLevelIndex < allLevels.Count)
             {
                 var level = allLevels[currentLevelIndex];
+                UnityEngine.Debug.Log($"GameModel: Loading level {currentLevelIndex + 1}: {level.levelId}");
                 OnLevelLoaded?.Invoke(level);
                 return level;
             }
+            UnityEngine.Debug.LogWarning("GameModel: No more levels to load");
             return null;
         }
 
@@ -56,6 +58,7 @@ namespace WordPuzzle.Model
                 }
             }
 
+            UnityEngine.Debug.Log($"GameModel: Answer submitted - Correct: {isCorrect}");
             if (isCorrect)
             {
                 playerScore += 10;
@@ -64,6 +67,7 @@ namespace WordPuzzle.Model
 
                 if (currentLevelIndex >= allLevels.Count)
                 {
+                    UnityEngine.Debug.Log("GameModel: All levels completed");
                     OnGameCompleted?.Invoke();
                 }
             }
@@ -71,13 +75,7 @@ namespace WordPuzzle.Model
             OnAnswerSubmitted?.Invoke(isCorrect, currentLevel.correctWords);
         }
 
-        // Add this method to expose playerScore
-        public int GetCurrentScore()
-        {
-            return playerScore;
-        }
-
-        // Optional: If you added this previously for level number
+        public int GetCurrentScore() => playerScore;
         public int GetCurrentLevelIndex() => currentLevelIndex;
     }
 }

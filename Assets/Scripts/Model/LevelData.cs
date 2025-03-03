@@ -7,10 +7,10 @@ namespace WordPuzzle.Model
     public class LevelData
     {
         public string levelId;
-        public Sprite problemImage;
-        public AnimationClip problemAnimation;
-        public AnimationClip correctAnimation;
-        public AnimationClip incorrectAnimation;
+        public Sprite problemImage; // Optional, can be null
+        public AnimationClip problemAnimation; // Optional, can be null
+        public AnimationClip correctAnimation; // Optional, can be null
+        public AnimationClip incorrectAnimation; // Optional, can be null
         public List<string> wordOptions = new List<string>();
         public List<string> correctWords = new List<string>();
     }

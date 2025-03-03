@@ -7,28 +7,21 @@ namespace WordPuzzle
     {
         [SerializeField] private GameController gameController;
 
-        private void Start() // Line 12
+        private void Start()
         {
+            Debug.Log("GameManager: Start called");
             StartGame();
         }
 
-        public void StartGame() // Line 17
+        public void StartGame()
         {
+            Debug.Log("GameManager: StartGame called");
+            if (gameController == null)
+            {
+                Debug.LogError("GameManager: GameController is null!");
+                return;
+            }
             gameController.StartGame();
-        }
-
-        public void RestartGame()
-        {
-            StartGame();
-        }
-
-        public void QuitGame()
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
         }
     }
 }

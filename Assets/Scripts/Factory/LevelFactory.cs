@@ -7,8 +7,8 @@ namespace WordPuzzle.Factory
     public class LevelFactory
     {
         public LevelData CreateLevel(string levelId, Sprite problemImage, AnimationClip problemAnimation,
-                                    AnimationClip correctAnimation, AnimationClip incorrectAnimation,
-                                    List<string> wordOptions, List<string> correctWords)
+                                     AnimationClip correctAnimation, AnimationClip incorrectAnimation,
+                                     List<string> wordOptions, List<string> correctWords)
         {
             return new LevelData
             {

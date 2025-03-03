@@ -1,30 +1,26 @@
 {
     "levels": [
         {
-            "levelId": "level_1",
-            "problemImagePath": "",
-            "problemAnimationPath": "",
-            "correctAnimationPath": "",
-            "incorrectAnimationPath": "",
+            "levelId": "Sick Mom",
+            "problemImagePath": "Assets/Resources/ProblemImages/DALL·E 2025-03-03 17.31.59 - A heartwarming scene of a young girl taking care of her sick mother at home. The mother is lying on a couch, covered with a cozy blanket, looking tire.jpg",
+            "problemAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
+            "correctAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
+            "incorrectAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
             "wordOptions": [
                 "Medicine",
-                "Water",
-                "Candy",
-                "Toy"
+                "Candy"
             ],
             "correctWords": [
                 "Medicine"
             ]
         },
         {
-            "levelId": "level_2",
-            "problemImagePath": "",
-            "problemAnimationPath": "",
-            "correctAnimationPath": "",
-            "incorrectAnimationPath": "",
+            "levelId": "ThirstyBoy",
+            "problemImagePath": "Assets/Resources/ProblemImages/DALL·E 2025-03-03 17.33.17 - A young boy, around 6 years old, looking very thirsty on a hot summer day. He is standing outside in a sunny park, sweating and holding an empty water.jpg",
+            "problemAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
+            "correctAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
+            "incorrectAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
             "wordOptions": [
-                "Juice",
-                "Soda",
                 "Water",
                 "Milk"
             ],
@@ -33,47 +29,41 @@
             ]
         },
         {
-            "levelId": "level_3",
-            "problemImagePath": "",
-            "problemAnimationPath": "",
-            "correctAnimationPath": "",
-            "incorrectAnimationPath": "",
+            "levelId": "HungryCat",
+            "problemImagePath": "Assets/Resources/ProblemImages/DALL·E 2025-03-03 17.33.56 - A hungry cat sitting outside a house, looking up with big, pleading eyes. The cat is a small, thin tabby with a slightly ruffled coat, sitting near an.jpg",
+            "problemAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
+            "correctAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
+            "incorrectAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
             "wordOptions": [
                 "Fish",
-                "Bone",
-                "Grass",
-                "Chocolate"
+                "Bone"
             ],
             "correctWords": [
                 "Fish"
             ]
         },
         {
-            "levelId": "level_4",
-            "problemImagePath": "",
-            "problemAnimationPath": "",
-            "correctAnimationPath": "",
-            "incorrectAnimationPath": "",
+            "levelId": "TiredMan",
+            "problemImagePath": "Assets/Resources/ProblemImages/DALL·E 2025-03-03 17.34.33 - A tired man sitting on a park bench in the evening, looking completely exhausted. He is wearing a slightly wrinkled shirt and tie, with his sleeves ro.jpg",
+            "problemAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
+            "correctAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
+            "incorrectAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
             "wordOptions": [
                 "Bed",
-                "Chair",
-                "Ball",
-                "Book"
+                "Chair"
             ],
             "correctWords": [
                 "Bed"
             ]
         },
         {
-            "levelId": "level_5",
-            "problemImagePath": "",
-            "problemAnimationPath": "",
-            "correctAnimationPath": "",
-            "incorrectAnimationPath": "",
+            "levelId": "LostDog",
+            "problemImagePath": "Assets/Resources/ProblemImages/DALL·E 2025-03-03 17.34.53 - A lost dog standing alone on a quiet street, looking confused and scared. The dog is a small golden retriever mix with a collar but no leash, its ears.jpg",
+            "problemAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
+            "correctAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
+            "incorrectAnimationPath": "Packages/com.unity.timeline/Editor/StyleSheets/res/HumanoidDefault.anim",
             "wordOptions": [
-                "Leash",
                 "Map",
-                "Food",
                 "Owner"
             ],
             "correctWords": [
