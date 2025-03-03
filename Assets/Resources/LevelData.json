@@ -1,0 +1,84 @@
+{
+    "levels": [
+        {
+            "levelId": "level_1",
+            "problemImagePath": "",
+            "problemAnimationPath": "",
+            "correctAnimationPath": "",
+            "incorrectAnimationPath": "",
+            "wordOptions": [
+                "Medicine",
+                "Water",
+                "Candy",
+                "Toy"
+            ],
+            "correctWords": [
+                "Medicine"
+            ]
+        },
+        {
+            "levelId": "level_2",
+            "problemImagePath": "",
+            "problemAnimationPath": "",
+            "correctAnimationPath": "",
+            "incorrectAnimationPath": "",
+            "wordOptions": [
+                "Juice",
+                "Soda",
+                "Water",
+                "Milk"
+            ],
+            "correctWords": [
+                "Water"
+            ]
+        },
+        {
+            "levelId": "level_3",
+            "problemImagePath": "",
+            "problemAnimationPath": "",
+            "correctAnimationPath": "",
+            "incorrectAnimationPath": "",
+            "wordOptions": [
+                "Fish",
+                "Bone",
+                "Grass",
+                "Chocolate"
+            ],
+            "correctWords": [
+                "Fish"
+            ]
+        },
+        {
+            "levelId": "level_4",
+            "problemImagePath": "",
+            "problemAnimationPath": "",
+            "correctAnimationPath": "",
+            "incorrectAnimationPath": "",
+            "wordOptions": [
+                "Bed",
+                "Chair",
+                "Ball",
+                "Book"
+            ],
+            "correctWords": [
+                "Bed"
+            ]
+        },
+        {
+            "levelId": "level_5",
+            "problemImagePath": "",
+            "problemAnimationPath": "",
+            "correctAnimationPath": "",
+            "incorrectAnimationPath": "",
+            "wordOptions": [
+                "Leash",
+                "Map",
+                "Food",
+                "Owner"
+            ],
+            "correctWords": [
+                "Owner"
+            ]
+        }
+    ]
+}
